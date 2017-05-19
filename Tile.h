@@ -5,8 +5,7 @@
 class Tile
 {
 public:
-	Tile(void);
-	~Tile(void);
+	Tile(const char* FileName);
 	void toggle ();
 	bool isSelected ();
 	std::string getFileName ();
