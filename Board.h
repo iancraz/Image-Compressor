@@ -20,5 +20,6 @@ protected:
 	std::vector<Tile> files;
 	uint pageNumber;
 	uint numberOfTiles;
+	ALLEGRO_BITMAP * selectTile;
 };
 
