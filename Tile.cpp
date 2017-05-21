@@ -10,7 +10,7 @@ Tile::Tile(const char* FileName,ALLEGRO_BITMAP * img)
 	imgWidth = al_get_bitmap_width(img);
 	imgHeight = al_get_bitmap_height(img);
 	x = 0;
-	y = 0
+	y = 0;
 	return;
 }
 

@@ -32,12 +32,12 @@ void Compressor::quadTree(params_s * _myStruct)
 	{
 		for(int i=x0; i<xf;i++)
 		{
-			Rmax = max(Rmax,img[4*(width*j+i)]);
-			Gmax = max(Gmax,img[4*(width*j+i)+1]);
-			Bmax = max(Bmax,img[4*(width*j+i)+2]);
-			Rmin = min(Rmin,img[4*(width*j+i)]);
-			Gmin = min(Gmin,img[4*(width*j+i)+1]);
-			Bmin = min(Bmin,img[4*(width*j+i)+2]);
+			Rmax = fmax(Rmax,img[4*(width*j+i)]);
+			Gmax = fmax(Gmax,img[4*(width*j+i)+1]);
+			Bmax = fmax(Bmax,img[4*(width*j+i)+2]);
+			Rmin = fmin(Rmin,img[4*(width*j+i)]);
+			Gmin = fmin(Gmin,img[4*(width*j+i)+1]);
+			Bmin = fmin(Bmin,img[4*(width*j+i)+2]);
 			Rmed += img[4*(width*j+i)];
 			Gmed += img[4*(width*j+i)+1];
 			Bmed += img[4*(width*j+i)+2];

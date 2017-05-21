@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <iostream>
+#include <allegro5/allegro.h>
 
 using namespace std;
 
@@ -64,5 +65,13 @@ void Board::selectItem(uint tileNumber)
 	if(selectedTile == NULL)
 		return;
 	files[tileNumber].toggle(selectedTile);
+	return;
+}
+
+void Board::addTile(Tile * newTile)
+{
+	if (newTile == NULL)
+		return;
+	files.push_back(*newTile);
 	return;
 }

@@ -1,17 +1,18 @@
 #pragma once
 #include "Tile.h"
 #include <vector>
+#include <allegro5/allegro.h>
 #define	B_DISPLAY_SIZE	DISPLAY_SIZE
-#define FIRST_POSITION	
-#define SECOND_POSITION 
-#define THIRD_POSITION
+#define FIRST_POSITION	20
+#define SECOND_POSITION (FIRST_POSITION+20)
+#define THIRD_POSITION	(SECOND_POSITION+20)
 
 typedef unsigned int uint;
 class Board
 {
 public:
 	Board(std::vector<char> * files);
-	void addTile();
+	void addTile(Tile * newTile);
 	void nextPage();
 	void previousPage();
 	bool draw();
