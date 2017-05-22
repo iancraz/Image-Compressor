@@ -6,16 +6,16 @@
 class Tile
 {
 public:
-	Tile(const char* FileName,ALLEGRO_BITMAP * img);
+	Tile(char* FileName,unsigned char * img,int x);
 	bool toggle(ALLEGRO_BITMAP * selectedImg);
 	bool isSelected ();
 	std::string getFileName ();
-	bool Draw (int x, int y);
+	bool draw (int x, int y);
+	int imgHeight,imgWidth;
+	unsigned char * img;
 protected:
 	std::string FileName;
 	bool Selected;
-	ALLEGRO_BITMAP * img;
-	int imgHeight,imgWidth;
 	int x,y;
 };
 

@@ -3,24 +3,26 @@
 #include <vector>
 #include <allegro5/allegro.h>
 #define	B_DISPLAY_SIZE	DISPLAY_SIZE
-#define FIRST_POSITION	20
-#define SECOND_POSITION (FIRST_POSITION+20)
-#define THIRD_POSITION	(SECOND_POSITION+20)
+#define SPACE_BETWEEN 	20
+#define BLOCK_SIZE	((B_DISPLAY_SIZE - 4*SPACE_BETWEEN)/3)
+#define FIRST_POSITION	SPACE_BETWEEN
+#define SECOND_POSITION (FIRST_POSITION+BLOCK_SIZE+SPACE_BETWEEN)
+#define THIRD_POSITION	(SECOND_POSITION+BLOCK_SIZE+SPACE_BETWEEN)
 
 typedef unsigned int uint;
 class Board
 {
 public:
-	Board(std::vector<char> * files);
+	Board(std::vector<Tile> * files);
 	void addTile(Tile * newTile);
 	void nextPage();
 	void previousPage();
 	bool draw();
 	void selectItem(uint tileNumber);
-protected:
 	std::vector<Tile> files;
+protected:
 	uint pageNumber;
 	uint numberOfTiles;
-	ALLEGRO_BITMAP * selectTile;
+	ALLEGRO_BITMAP * selectedTile;
 };
 

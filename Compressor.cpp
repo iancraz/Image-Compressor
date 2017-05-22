@@ -2,15 +2,13 @@
 
 using namespace std;
 
-Compressor::Compressor(int _width, char* _img, int _th)
+Compressor::Compressor(int _width,unsigned char* _img, int _th)
 {
 	th= _th;
 	img=_img;
 	width=_width;
 	myStruct.x0 = myStruct.y0=0;
 	myStruct.xf = myStruct.yf=width;
-
-	
 }
 
 Compressor::~Compressor(void)

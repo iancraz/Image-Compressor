@@ -4,13 +4,13 @@
 
 using namespace std;
 
-Board::Board(std::vector<char> * files)
+Board::Board(std::vector<Tile> * files)
 {
 	pageNumber =0;
 	this->files = *files;
-	numberOfTiles = files.size();
-	char * fileName = "resources/selectedTile.bmp"
-	selectedTile = al_load_bitmap(fileName)
+	numberOfTiles = files->size();
+	char * fileName = "resources/selectedTile.bmp";
+	selectedTile = al_load_bitmap(fileName);
 	if(selectedTile == NULL)
 		cout << "Could Not Load Image: " << fileName << endl;
 	return;
@@ -57,6 +57,7 @@ bool Board::draw()
 		if(no_error == false)
 			return no_error;
 	}
+	al_flip_display();
 	return no_error;
 }
 

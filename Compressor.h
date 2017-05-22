@@ -11,16 +11,15 @@ typedef struct
 class Compressor
 {
 public:
-	Compressor(int _width, char* _img, int _th);
+	Compressor(int _width,unsigned char* _img, int _th);
 	~Compressor(void);
 	void quadTree(params_s * _myStruct);
-
-protected:
 	params_s myStruct;
+protected:
 	int th;
 	std::vector<char> myLuis;
 	params_s changeParams(params_s * st, int type);
-	char *img;
+	unsigned char *img;
 	int width;
 };
 

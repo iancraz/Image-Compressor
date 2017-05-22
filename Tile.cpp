@@ -1,14 +1,15 @@
 #include "Tile.h"
+#include <cmath>
 #define IMG_DEFASAJEX	0
 #define IMG_DEFASAJEY	0
 
-Tile::Tile(const char* FileName,ALLEGRO_BITMAP * img)
+Tile::Tile(char* FileName,unsigned char * img,int x)
 {
 	Selected=false;
 	this->FileName = FileName;
 	this->img = img;
-	imgWidth = al_get_bitmap_width(img);
-	imgHeight = al_get_bitmap_height(img);
+	imgWidth = x;
+	imgHeight = imgWidth;
 	x = 0;
 	y = 0;
 	return;
