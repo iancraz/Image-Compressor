@@ -1,7 +1,7 @@
 #include <iostream>
 #define DISPLAY_SIZE	210
 #define TH 30
-#define ERROR -1
+#define M_ERROR -1
 #define EXTENTION	".png"
 #include "Board.h"
 #include "Tile.h"
@@ -10,8 +10,11 @@
 #include "Compressor.h"
 #include <vector>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_image.h>
 
 uint checkPosition(ALLEGRO_MOUSE_STATE state);
+void selectTile(Board * myBoard);
 
 using namespace std;
 
@@ -22,38 +25,49 @@ int main (int argc, char* argv [])
 	if(!al_init())
 	{
 		cout << "Error, could not init allegro!" << endl;
-		return ERROR;
+		return M_ERROR;
+	}
+	if (!al_init_image_addon())
+	{
+		cout << "Error, could not init image addon!" << endl;
+		return M_ERROR;
 	}
 	al_install_mouse();
 
 	display = al_create_display(DISPLAY_SIZE,DISPLAY_SIZE);
 	if(!display)
-		return ERROR;
-	vector<string> images = FilesSystem(".\\resources\\",EXTENTION);
+		return M_ERROR;
+	vector<string> images = FileSystem("C:\\hola",EXTENTION);
 	vector<Tile> myTiles;
 	unsigned char * img;
-	unsigned w,h,
+	unsigned w, h;
 	char * fileName; 
-	for(int i = 0 ; i < images.size(); i++)
+	for (size_t i = 0; i < images.size(); i++)
 	{
-		fileName = convert2CharPointer(images[i]);
-		lodepng_decode32_file(&img,&w,&h,fileName);
-		myTiles.push_back(Tile(fileName,img,w));
+		fileName = Convert2CharPointer(images[i]);
+		lodepng_decode32_file(&img, &w, &h, fileName);
+		myTiles.push_back(Tile(fileName,img,w, al_load_bitmap(fileName)));
 	}
 	Board myBoard(&myTiles);
 	myTiles.clear();
 	myBoard.draw();
 	selectTile(&myBoard);
-	for(int i = 0; i < myBoard.files.size(); i++)
+	for(size_t i = 0; i < myBoard.files.size(); i++)
 	{
 		if(myBoard.files[i].isSelected())
 		{
 			Compressor myCarlos(myBoard.files[i].imgHeight, myBoard.files[i].img, TH);
 			myCarlos.quadTree(&myCarlos.myStruct);
-			myCarlos.
+			int i;
+			for (i = 0; fileName[i] == '.'; i++);
+			fileName[i + 1] = 'e';
+			fileName[i + 2] = 'd';
+			fileName[i + 3] = 'a';
+			ofstream fout = ocreatefile(".\\compressed\\", (string)fileName);
+			fout << (myCarlos.myLuis);
 		}
 	}
-
+	getchar();
 
 	al_destroy_display(display);
 }
@@ -61,13 +75,14 @@ int main (int argc, char* argv [])
 
 void selectTile(Board * myBoard)
 {
+	ALLEGRO_MOUSE_STATE state;
 	uint tileNumber = 11;
 	al_get_mouse_state(&state);
 	while(tileNumber != 11)
 	{
 		if(state.buttons & 1)
 		{
-			tileNumber = checkPosition(&state);
+			tileNumber = checkPosition(state);
 			myBoard->selectItem(tileNumber);
 			myBoard->draw();
 		}

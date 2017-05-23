@@ -39,7 +39,7 @@ ofstream ocreatefile(string path, string name) {
 	return dest;
 }
 
-ostream& operator<<(ostream& o, vector<string> c) {
+ostream& operator<<(ostream& o, vector<char> c) {
 	for (int i = 0; i < c.size(); i++) {
 		o << c[i] << endl;
 	}

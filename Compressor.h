@@ -15,11 +15,11 @@ public:
 	~Compressor(void);
 	void quadTree(params_s * _myStruct);
 	params_s myStruct;
+	std::vector<char> myLuis;
 protected:
 	int th;
-	std::vector<char> myLuis;
 	params_s changeParams(params_s * st, int type);
-	unsigned char *img;
+	unsigned char * img = NULL;
 	int width;
 };
 
