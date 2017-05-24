@@ -1,5 +1,7 @@
 #include "Tile.h"
 #include <cmath>
+#include "Board.h"
+#define TILE_SIZE	BLOCK_SIZE
 #define IMG_DEFASAJEX	0
 #define IMG_DEFASAJEY	0
 

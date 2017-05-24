@@ -46,7 +46,7 @@ void Compressor::quadTree(params_s * _myStruct)
 	Bmed /= (xf-x0)*(yf-y0);
 	
 	p=(Rmax-Rmin)+(Gmax-Gmin)+(Bmax-Bmin);
-	if(p<th)
+	if(p>th)
 	{
 		myLuis.push_back(1);
 		quadTree (&changeParams (_myStruct, FIRSTBLOCK));

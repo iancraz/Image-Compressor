@@ -10,7 +10,7 @@ vector<string> FileSystem(string path, string extension) {
 	string test = extension;
 	for (itr; itr != boost::filesystem::directory_iterator(); itr++)
 	{
-		s = itr->path().filename().string();
+		s = itr->path().string();
 		for (int i = 0;i < extension.size(); i++)
 		{
 			if (s[s.size() - extension.size() + i] != test[i])

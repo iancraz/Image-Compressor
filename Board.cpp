@@ -9,7 +9,7 @@ Board::Board(std::vector<Tile> * files)
 	pageNumber =0;
 	this->files = *files;
 	numberOfTiles = files->size();
-	char * fileName = "selectedTile.png";
+	char * fileName = "resources\\selectedTile.png";
 	selectedTile = al_load_bitmap(fileName);
 	if(selectedTile == NULL)
 		cout << "Could Not Load Image: " << fileName << endl;

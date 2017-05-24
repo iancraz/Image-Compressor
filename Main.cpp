@@ -1,5 +1,5 @@
 #include <iostream>
-#define DISPLAY_SIZE	210
+#define DISPLAY_SIZE	640
 #define TH 30
 #define M_ERROR -1
 #define EXTENTION	".png"
@@ -37,7 +37,13 @@ int main (int argc, char* argv [])
 	display = al_create_display(DISPLAY_SIZE,DISPLAY_SIZE);
 	if(!display)
 		return M_ERROR;
-	vector<string> images = FileSystem("C:\\hola",EXTENTION);
+	string myPath = "C:\\Users\\Ian\\Documents\\Visual Studio 2017\\Projects\\Hola\\Hola\\wallpapers";
+	vector<string> images = FileSystem(myPath,EXTENTION);
+	if (images.size() == 0)
+	{
+		cout << "No images on the folder" << myPath << endl;
+		return EXIT_SUCCESS;
+	}
 	vector<Tile> myTiles;
 	unsigned char * img;
 	unsigned w, h;
@@ -50,8 +56,15 @@ int main (int argc, char* argv [])
 	}
 	Board myBoard(&myTiles);
 	myTiles.clear();
-	myBoard.draw();
-	selectTile(&myBoard);
+	if (!myBoard.draw())
+	{
+		cout << "Could Not Display Images" << endl;
+		return M_ERROR;
+	}
+	//selectTile(&myBoard);
+	myBoard.selectItem(3);
+	myBoard.selectItem(4);
+
 	for(size_t i = 0; i < myBoard.files.size(); i++)
 	{
 		if(myBoard.files[i].isSelected())
@@ -63,7 +76,7 @@ int main (int argc, char* argv [])
 			fileName[i + 1] = 'e';
 			fileName[i + 2] = 'd';
 			fileName[i + 3] = 'a';
-			ofstream fout = ocreatefile(".\\compressed\\", (string)fileName);
+			ofstream fout = ocreatefile("C:\\Users\\Ian\\Documents\\Visual Studio 2017\\Projects\\Hola\\Hola\\compressed", (string)fileName);
 			fout << (myCarlos.myLuis);
 		}
 	}
@@ -76,16 +89,17 @@ int main (int argc, char* argv [])
 void selectTile(Board * myBoard)
 {
 	ALLEGRO_MOUSE_STATE state;
-	uint tileNumber = 11;
-	al_get_mouse_state(&state);
+	uint tileNumber = 0;
 	while(tileNumber != 11)
 	{
+		al_get_mouse_state(&state);
 		if(state.buttons & 1)
 		{
 			tileNumber = checkPosition(state);
 			myBoard->selectItem(tileNumber);
 			myBoard->draw();
 		}
+		state.buttons = 0;
 	}
 	return;
 }

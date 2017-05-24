@@ -2,8 +2,8 @@
 #include "Tile.h"
 #include <vector>
 #include <allegro5/allegro.h>
-#define	B_DISPLAY_SIZE	210
-#define SPACE_BETWEEN 	20
+#define	B_DISPLAY_SIZE	640
+#define SPACE_BETWEEN 	40
 #define BLOCK_SIZE	((B_DISPLAY_SIZE - 4*SPACE_BETWEEN)/3)
 #define FIRST_POSITION	SPACE_BETWEEN
 #define SECOND_POSITION (FIRST_POSITION+BLOCK_SIZE+SPACE_BETWEEN)
