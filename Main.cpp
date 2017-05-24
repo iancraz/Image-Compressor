@@ -11,6 +11,7 @@
 #include "FileSystem.h"
 #include "Compressor.h"
 #include "ParseCommandLine.h"
+#include <string>
 #include <vector>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -102,9 +103,11 @@ int main(int argc, char* argv[])
 				fileName[i + 2] = 'd';
 				fileName[i + 3] = 'a';
 				ofstream fout = ocreatefile(COMPRESSED_PATH, fileName);
+				//Agregar el heaer de la imagen antes de guardarla!!!
 				fout << (myCarlos.myLuis);
 			}
 		}
+		free(img);
 	}
 	else
 	{
