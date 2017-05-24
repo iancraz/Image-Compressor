@@ -14,9 +14,10 @@ public:
 	Compressor(int _width,unsigned char* _img, int _th);
 	~Compressor(void);
 	void quadTree(params_s * _myStruct);
-	params_s myStruct;
+	params_s getStructure();
 	std::vector<char> myLuis;
 protected:
+	params_s myStruct;
 	int th;
 	params_s changeParams(params_s * st, int type);
 	unsigned char * img = NULL;

@@ -103,3 +103,8 @@ params_s Compressor::changeParams(params_s * st, int type)
 
 	}
 }
+
+params_s Compressor::getStructure()
+{
+	return myStruct;
+}

@@ -47,3 +47,20 @@ bool Tile::draw (int x, int y)
 	al_draw_scaled_bitmap(myBitmap,(float)x,(float)y,imgWidth,imgHeight,(float)x,(float)y,TILE_SIZE,TILE_SIZE,0);
 	return true;
 }
+
+int Tile::getImgSize()
+{
+	int answer = 0;
+	imgHeight == imgWidth ? answer = imgHeight : answer = T_WRONG_SIZE;
+	return answer;
+}
+
+unsigned char * Tile::getImgPtr()
+{
+	return img;
+}
+
+ALLEGRO_BITMAP * Tile::getAllegroBitmap()
+{
+	return myBitmap;
+}

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <allegro5/allegro.h>
+#define T_WRONG_SIZE	-1
 
 class Tile
 {
@@ -10,10 +11,13 @@ public:
 	bool isSelected ();
 	std::string getFileName ();
 	bool draw (int x, int y);
-	int imgHeight,imgWidth;
+	int getImgSize(void);
+	unsigned char * getImgPtr(void);
+	ALLEGRO_BITMAP * getAllegroBitmap();
+protected:
+	int imgHeight, imgWidth;
 	unsigned char * img;
 	ALLEGRO_BITMAP	* myBitmap;
-protected:
 	std::string FileName;
 	bool Selected;
 	int x,y;
