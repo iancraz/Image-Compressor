@@ -8,8 +8,7 @@ using namespace std;
 //abajo esta como funcionan el programas
 vector<string> FileSystem(string path, string extension);
 char* Convert2CharPointer(string s);
-void createfile(string path, string name);
-ofstream ocreatefile(string path, string name);
+ofstream createfile(string path, string name);
 ostream& operator<<(ostream& o, vector<char> c);
 
 /*El magiafile lo que hace es recibir en path de donde querés 

@@ -10,7 +10,7 @@ vector<string> FileSystem(string path, string extension) {
 	string test = extension;
 	for (itr; itr != boost::filesystem::directory_iterator(); itr++)
 	{
-		s = itr->path().string();
+		s = itr->path().filename().string();
 		for (int i = 0;i < extension.size(); i++)
 		{
 			if (s[s.size() - extension.size() + i] != test[i])
@@ -27,15 +27,12 @@ vector<string> FileSystem(string path, string extension) {
 	return str;
 }
 
-void createfile(string path, string name) {
-	boost::filesystem::path dir(path + "\\"+ name);
+ofstream createfile(string pos, string name) {
+	boost::filesystem::path dir(pos);
 	boost::filesystem::create_directory(dir);
-}
-
-ofstream ocreatefile(string path, string name) {
-	boost::filesystem::path dir(path + "\\" + name);
-	boost::filesystem::create_directory(dir);
-	ofstream dest(path + "\\" + name);
+	/*string pos1 = pos;
+	string name1 = name;*/
+	ofstream dest(pos + "\\" + name);
 	return dest;
 }
 
