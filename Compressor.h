@@ -15,7 +15,7 @@ public:
 	~Compressor(void);
 	void quadTree(params_s * _myStruct);
 	params_s getStructure();
-	std::vector<char> myLuis;
+	std::vector<char> myList;
 protected:
 	params_s myStruct;
 	int th;

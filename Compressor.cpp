@@ -48,7 +48,7 @@ void Compressor::quadTree(params_s * _myStruct)
 	p=(Rmax-Rmin)+(Gmax-Gmin)+(Bmax-Bmin);
 	if(p>th)
 	{
-		myLuis.push_back(1);
+		myList.push_back(1);
 		quadTree (&changeParams (_myStruct, FIRSTBLOCK));
 		quadTree (&changeParams (_myStruct, SECONDBLOCK));
 		quadTree (&changeParams (_myStruct, THIRDBLOCK));
@@ -56,10 +56,10 @@ void Compressor::quadTree(params_s * _myStruct)
 	}
 	else
 	{
-		myLuis.push_back(0);
-		myLuis.push_back((char)Rmed);
-		myLuis.push_back((char)Gmed);
-		myLuis.push_back((char)Bmed);
+		myList.push_back(0);
+		myList.push_back((char)Rmed);
+		myList.push_back((char)Gmed);
+		myList.push_back((char)Bmed);
 	}
 }
 

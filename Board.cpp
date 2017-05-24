@@ -6,13 +6,15 @@ using namespace std;
 
 Board::Board(std::vector<Tile> * files)
 {
-	pageNumber =0;
-	this->files = *files;
-	numberOfTiles = files->size();
-	char * fileName = "resources\\selectedTile.png";
-	selectedTile = al_load_bitmap(fileName);
-	if(selectedTile == NULL)
-		cout << "Could Not Load Image: " << fileName << endl;
+	initBoard(files);
+	return;
+}
+
+Board::Board()
+{
+	pageNumber = 0;
+	numberOfTiles = 0;
+	selectedTile = NULL;
 	return;
 }
 
@@ -74,5 +76,17 @@ void Board::addTile(Tile * newTile)
 	if (newTile == NULL)
 		return;
 	files.push_back(*newTile);
+	return;
+}
+
+void Board::initBoard(std::vector<Tile> * files)
+{
+	pageNumber = 0;
+	this->files = *files;
+	numberOfTiles = files->size();
+	char * fileName = "resources\\selectedTile.png";
+	selectedTile = al_load_bitmap(fileName);
+	if (selectedTile == NULL)
+		cout << "Could Not Load Image: " << fileName << endl;
 	return;
 }

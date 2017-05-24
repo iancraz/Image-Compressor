@@ -14,6 +14,8 @@ class Board
 {
 public:
 	Board(std::vector<Tile> * files);
+	Board();
+	void initBoard(std::vector<Tile> * files);
 	void addTile(Tile * newTile);
 	void nextPage();
 	void previousPage();
