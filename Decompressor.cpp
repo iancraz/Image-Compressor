@@ -20,7 +20,7 @@ Decompressor::~Decompressor()
 
 bool Decompressor::extract(void)
 {
-	outImg = new char[imgSize*imgSize];
+	outImg = new char[imgSize*imgSize*4];
 	imageCounter = 0;
 	recursive(0, 0, imgSize, imgSize);
 	if (error == D_FILE_CORRUPTED)
@@ -46,17 +46,20 @@ void Decompressor::recursive(int x0, int x1, int y0, int y1)
 {
 	char byte;
 	byte = img[imageCounter];
+	imageCounter++;
 	if (imageCounter == imgSize || error == D_FILE_CORRUPTED)
 		return;
 	if (byte == 0)
 	{
+		unsigned char red = img[imageCounter];
 		imageCounter++;
-		char red = img[imageCounter];
+		unsigned char green = img[imageCounter];
 		imageCounter++;
-		char green = img[imageCounter];
-		imageCounter++;
-		char blue = img[imageCounter];
+		unsigned char blue = img[imageCounter];
 		drawSqare(red, green, blue, x0, x1, y0, y1);
+		imageCounter++;
+		unsigned char alpha = img[imageCounter];
+		imageCounter++;
 		return;
 	}
 	else if (byte == 1)
@@ -78,13 +81,14 @@ void Decompressor::recursive(int x0, int x1, int y0, int y1)
 void Decompressor::drawSqare(char r, char g, char b, int x0, int x1,int y0, int y1)
 {
 	int size = x1 - x0;
-	for (; y0 <= y1; y0++)
+	for (j=y0;j <= y1; j++)
 	{
 		for (int i = 0; i <= size; i++)
 		{
-			outImg[(y0*imgSize) + (x0 + i)] = r;
-			outImg[(y0*imgSize) + (x0 + i) + 1] = g;
-			outImg[(y0*imgSize) + (x0 + i) + 2] = b;			//FIJARSE SI FALTA ALPHA O NOOO!!!!!!!!
+			outImg[((i * 4) + (4 * imgSize * j)) + 0] = r;
+			outImg[((i * 4) + (4 * imgSize* j)) + 1] = g;
+			outImg[((i * 4) + (4 * imgSize* j)) + 2] = b; 
+			outImg[((i * 4) + (4 * imgSize* j)) + 3] = 0xff; //alpha en 100
 		}
 	}
 	return;
@@ -110,10 +114,10 @@ void Decompressor::initDecompressor(string filePath)
 		FileRaw.get(c);
 		FileVector.push_back(c);
 	}
-	img = new char[FileVector.size()];
+	img = new unsigned char[FileVector.size()];
 	for (size_t i = 0; i < FileVector.size(); i++)
-		img[i] = FileVector[i + 3];
-	imgSize = (FileVector[0] + FileVector[1] + FileVector[2]);
+		img[i] = FileVector[i + 4];
+	imgSize = (FileVector[0] + FileVector[1] + FileVector[2] +FileVector[3]);
 	return;
 }
 
