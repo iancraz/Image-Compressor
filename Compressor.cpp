@@ -21,32 +21,44 @@ void Compressor::quadTree(params_s * _myStruct)
 	unsigned int x0 =_myStruct->x0, y0=_myStruct->y0,xf=_myStruct->xf,yf=_myStruct->yf;
 
 	double Rmed= 0.0, Gmed= 0.0, Bmed= 0.0;
-	char Rmax= 0, Gmax= 0, Bmax = 0;
-	char Rmin= 255, Gmin = 255, Bmin = 255;
-	int p = 0;
+	unsigned char Rmax= 0, Gmax= 0, Bmax = 0;
+	unsigned char Rmin= 255, Gmin = 255, Bmin = 255;
+	unsigned int p = 0;
 	int sumX = 4*(xf -x0);
 	int sumY = 4*(yf -y0);
 	for (int j=y0; j<yf; j++)
 	{
-		for(int i=x0; i<xf;i++)
+		for(int i=x0; i<xf;i=i+4)
 		{
-			Rmax = fmax(Rmax,img[4*(width*j+i)]);
-			Gmax = fmax(Gmax,img[4*(width*j+i)+1]);
-			Bmax = fmax(Bmax,img[4*(width*j+i)+2]);
-			Rmin = fmin(Rmin,img[4*(width*j+i)]);
-			Gmin = fmin(Gmin,img[4*(width*j+i)+1]);
-			Bmin = fmin(Bmin,img[4*(width*j+i)+2]);
+			if (img[(j*width+ i)*4]>Rmax)
+				Rmax = img[(j*width + i)*4];
+
+			else if (img[(j*width + i)*4]<Rmin)
+				Rmin = img[(j*width + i)*4];
+
+			if (img[(j*width + i)*4 + 1]>Gmax)
+				Gmax = img[(j*width + i)*4 + 1];
+
+			else if (img[(j*width + i)*4 + 1]<Gmin)
+				Gmin = img[(j*width + i) * 4 + 1];
+
+			if (img[(j*width + i)*4 + 2] >Bmax)
+				Bmax = img[(j*width + i) * 4 + 2];
+
+			else if (img[(j*width + i)*4 + 2] < Bmin)
+				Bmin = img[(j*width + i)*4 + 2] ;
+
 			Rmed += img[4*(width*j+i)];
-			Gmed += img[4*(width*j+i)+1];
-			Bmed += img[4*(width*j+i)+2];
+			Gmed += img[4*(width*j+i+1)];
+			Bmed += img[4*(width*j+i+2)];
 		}
 	}
-	Rmed /= (xf-x0)*(yf-y0);
-	Gmed /= (xf-x0)*(yf-y0);
-	Bmed /= (xf-x0)*(yf-y0);
+	Rmed = (Rmax + Rmin) / 2;
+	Gmed = (Gmax + Gmin) / 2;
+	Bmed = (Bmax + Bmin) / 2;
 	
-	p=(Rmax-Rmin)+(Gmax-Gmin)+(Bmax-Bmin);
-	if(p>th)
+	p=((Rmax-Rmin)+(Gmax-Gmin)+(Bmax-Bmin))/3;
+	if(p>th && sumX>= 1)
 	{
 		myList.push_back(1);
 		quadTree (&changeParams (_myStruct, FIRSTBLOCK));
@@ -57,9 +69,9 @@ void Compressor::quadTree(params_s * _myStruct)
 	else
 	{
 		myList.push_back(0);
-		myList.push_back((char)Rmed);
-		myList.push_back((char)Gmed);
-		myList.push_back((char)Bmed);
+		myList.push_back((unsigned char)Rmed);
+		myList.push_back((unsigned char)Gmed);
+		myList.push_back((unsigned char)Bmed);
 	}
 }
 
